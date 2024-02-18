@@ -17,6 +17,7 @@
 #include <string.h>
 
 
+// run process based on given array of command and parameters
 void runcmd(char** cmdarr) {
     if (strcmp(cmdarr[0], "pwd") == 0) {
         char *buf = (char*) malloc(MAXBUF);
@@ -27,33 +28,34 @@ void runcmd(char** cmdarr) {
         else {
             chdir(cmdarr[1]);
         }
+    } else if (strcmp(cmdarr[0], "") == 0) {
+        printf("Please enter a command!\n");
+    } else if (strcmp(cmdarr[0], "exit") == 0) {
+        printf("Goodbye!\n");
     } else printf("ERROR: %s not found!\n", cmdarr[0]);
+
     free(cmdarr);
 }
 
+
+// given a string, return array of strings split at delimeter
 char** split(char *str, char *delim) {
-    // initialize array of strings
     char **out = (char**) malloc(MAXBUF * sizeof(char*));
     for (int i = 0; i < MAXARG; i++)
         out[i] = (char*) malloc(MAXBUF * sizeof(char*));
 
-    char *buf = (char*) malloc(MAXBUF * sizeof(char*));
-    int i = 0;
-    int j = 0;
+    int word_i = 0, out_i = 0, outword_i = 0;
     char c = str[0];
     while (c != NULL) {
-        c = str[i];
+        c = str[word_i++];
         if (c == '\n') break;
         if (c == ' ') {
-            strcpy(out[j], buf);
-            memset(buf, '\0', sizeof(buf));
-            j++;
+            out_i++;
+            outword_i = 0;
             continue;
         }
-        strncat(buf, &c, 1);
-        i++;
+        out[out_i][outword_i++] = c;
     }
-    strcpy(out[j], buf);
+
     return out;
 }
-

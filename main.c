@@ -25,12 +25,11 @@ int main(int argc, char *argv[]) {
 	// DO NOT REMOVE THE BLOCK ABOVE THIS LINE //
 
         char *cmdline = (char*) malloc(MAXBUF);
-        while (1) {
+        do {
             printf("dsh> ");
             fgets(cmdline, MAXBUF, stdin);
-            if (strcmp(cmdline, "exit\n") == 0) break;
             runcmd(split(cmdline, " "));
-        }
-
+        } while (strcmp(cmdline, "exit\n") != 0);
+        free(cmdline);
 	return 0;
 }
