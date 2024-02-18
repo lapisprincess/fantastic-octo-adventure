@@ -56,3 +56,6 @@ dsh
 
 # VScode specific
 .vscode
+
+#vimmy mcvimster
+*.swp
