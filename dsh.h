@@ -5,5 +5,7 @@
 // TODO: Any global variables go below
 
 // TODO: Function declarations go below
-void runcmd(char** cmd);
+int runcmd(char** cmd);
+int builtin(const char* command, char** cmdarr);
+int resolvepth(char *out, char *cmd);
 char** split(char *str, char *delim);

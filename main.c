@@ -24,12 +24,13 @@ int main(int argc, char *argv[]) {
 	setrlimit(RLIMIT_NPROC, &limit);
 	// DO NOT REMOVE THE BLOCK ABOVE THIS LINE //
 
-        char *cmdline = (char*) malloc(MAXBUF);
+        char *cmdline = (char*) malloc(MAXBUF * sizeof(char));
         do {
             printf("dsh> ");
             fgets(cmdline, MAXBUF, stdin);
-            runcmd(split(cmdline, " "));
+            if (runcmd(split(cmdline, " ")) == 2) break;
         } while (strcmp(cmdline, "exit\n") != 0);
+
         free(cmdline);
 	return 0;
 }
