@@ -49,7 +49,7 @@ int runcmd(char** cmdarr) {
 
     // fork and exec
     int pid = fork();
-    if ((pid == 0) && (execv(fullpath, argv) == -1)) { // child and failing
+    if ((pid == 0) && (execv(fullpth, argv) == -1)) { // child and failing
         printf("ERROR: unable to run process %s!\n", command);
         return 2;
     } else if (!shouldwait) { // parent and waiting
@@ -123,8 +123,6 @@ int resolvepth(char *out, char *cmd) {
     } 
 
     // no luck :(
-    free(path);
-    free(buf);
     return 1;
 }
 
